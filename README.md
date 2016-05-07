@@ -2,7 +2,7 @@
 
 Breadline is a suite of geospatial web applications produced as part of [Hong Kong Food Works](http://hkfoodworks.com/).
 
-breadline-fhk maps bakeries in Feeding Hong Kong [Breadrun](http://feedinghk.org/bread-run/) events, and lists their availability for volunteer collection according to [Eventbrite](http://www.eventbrite.hk/o/feeding-hong-kong-2684124262) tickets for each Breadrun event.
+breadline-fhk maps bakeries in Feeding Hong Kong [Bread Run](http://feedinghk.org/bread-run/) events, and lists their availability for volunteer collection according to [Eventbrite](http://www.eventbrite.hk/o/feeding-hong-kong-2684124262) tickets for each Bread Run event.
 
 ### App
 Uses NodeJS + Express web framework.
