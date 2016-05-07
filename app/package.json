@@ -1,7 +1,7 @@
 {
   "name": "breadline-fhkbreadrun",
   "version": "0.0.1",
-  "description": "Map of bakeries in Feeding Hong Kong Breadrun events",
+  "description": "Map of bakeries in Feeding Hong Kong Bread Run events",
   "author": "Tomas Holderness <tomasholderness@gmail.com>",
   "dependencies": {
     "express": "^4.13.4"

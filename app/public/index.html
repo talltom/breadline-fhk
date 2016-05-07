@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>The FHK Bread Run Map</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Sidebar -->
+    <link href="css/sidebar.css" rel="stylesheet">
+
+    <!-- Bootstrap Switch -->
+    <link href="css/bootstrap-switch.css" rel="stylesheet">
+
+    <!-- Boostrap select -->
+    <link href="css/bootstrap-select.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <div class="sidebar-nav" >
+                <div class="sidebar-element">
+                  <p>Feeding Hong Kong</p>
+                </div>
+                <div class="sidebar-brand">
+                  Bread Run
+                </div>
+
+                <select class="selectpicker" title="Select Event" data-mobile=true style="margin-left:20px;">
+                  <option>The FHK Bread Run - May 31, 2016</option>
+                  <option>The FHK Bread Run - May 31, 2016</option>
+                  <option>The FHK Bread Run - May 31, 2016</option>
+                </select>
+
+                <div class="panel panel-default sidebar-element">
+
+                  <div class="panel-body">
+                    <div>My location <div class="pull-right"><input type="checkbox" class="pull-right" name="my-location" false></div></div>
+                    <BR>
+                    <div><h5 style="margin-bottom:4px;">Bakeries for Collection</h5></div>
+                    <div>12 Available <div class="pull-right"><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:#e51843;font-weight:bold"></span></div></div>
+                    <div>15 Unavailable <div class="pull-right"><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:grey;font-weight:bold"></span></div></div>
+                  </div>
+                </div>
+          </div>
+          <div class="navbar navbar-fixed-bottom" style="height:20px;min-height:20px;">
+            <p style="font-size:10px;margin-left:20px;color:#FFF;">BreadLine OpenSource &middot HK FoodWorks &copy 2016</p>
+          </div>
+
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper" style="overflow:visible;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Simple Sidebar</h1>
+                        <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
+                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+
+    <!-- /#wrapper -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+    <!-- Location switch -->
+    <script src="js/bootstrap-switch.js"></script>
+    <script>
+    $.fn.bootstrapSwitch.defaults.size = 'mini';
+    $("[name='my-location']").bootstrapSwitch();
+    </script>
+
+    <!-- Selector -->
+    <script src="js/bootstrap-select.js"></script>
+    <script>
+    $(document).on('change','.selectpicker',function(e){console.log(this.options[e.target.selectedIndex].text)})
+    </script>
+  </body>
+</html>
