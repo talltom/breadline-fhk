@@ -40,7 +40,7 @@
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-    padding: 15px;
+    padding: 0px;
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -55,6 +55,7 @@
     top: 0;
     width: 250px;
     list-style: none;
+    margin-bottom:
 }
 
 .sidebar-nav > .sidebar-element {
@@ -100,7 +101,7 @@
     }
 
     #page-content-wrapper {
-        padding: 20px;
+        padding: 0px;
         position: relative;
     }
 
