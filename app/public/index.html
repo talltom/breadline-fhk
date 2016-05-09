@@ -44,20 +44,16 @@
                   Bread Run
                 </div>
 
-                <select class="selectpicker" title="Select Event" data-mobile=true style="margin-left:20px;">
-                  <option>The FHK Bread Run - May 31, 2016</option>
-                  <option>The FHK Bread Run - May 31, 2016</option>
-                  <option>The FHK Bread Run - May 31, 2016</option>
-                </select>
-
+                <select class="selectpicker" title="Select Event" data-mobile=true style="margin-left:20px;"></select>
                 <div class="panel panel-default sidebar-element">
-
-                  <div class="panel-body">
-                    <div>My location <div class="pull-right"><input type="checkbox" class="pull-right" name="my-location" false></div></div>
-                    <BR>
+                  <div class="panel-body" id="legend">
+                    <div><h5 style="margin-bottom:16px;"><a href="https://eventbrite.hk" target="_blank">Event registration</a></h5></div>
                     <div><h5 style="margin-bottom:4px;">Bakeries for Collection</h5></div>
-                    <div>12 Available <div class="pull-right"><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:#e51843;font-weight:bold"></span></div></div>
-                    <div>15 Unavailable <div class="pull-right"><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:grey;font-weight:bold"></span></div></div>
+                    <div><span id="labelAvailable"></span><span>Available <div class="pull-right"><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:#e51843;font-weight:bold"></span></div></span></div>
+                    <div><span id="labelUnavailable"></span><span>Unavailable <div class="pull-right"><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:grey;font-weight:bold"></span></div></span></div>
+                    <BR>
+                    <div>My location <div class="pull-right"><input type="checkbox" class="pull-right" name="my-location" false></div></div>
+
                   </div>
                 </div>
           </div>
@@ -81,12 +77,9 @@
                     <div class="col-lg-12" style="padding:0;" id="map"></div>
                 </div>
             </div>
-        </div>
-        <!-- /#page-content-wrapper -->
+        </div> <!-- /#page-content-wrapper -->
 
-    </div>
-
-    <!-- /#wrapper -->
+    </div> <!-- /#wrapper -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="js/jquery.js"></script>
@@ -94,27 +87,70 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.js"></script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-
-    </script>
-
     <!-- Location switch -->
     <script src="js/bootstrap-switch.js"></script>
+
+    <!-- Selector -->
+    <script src="js/bootstrap-select.js"></script>
+
+    <!-- Map -->
+    <script src="js/leaflet.js"></script>
+
+    <!-- Data -->
+    <script src="js/data.js"></script>
+
     <script>
     $.fn.bootstrapSwitch.defaults.size = 'mini';
     $("[name='my-location']").bootstrapSwitch();
     </script>
 
-    <!-- Selector -->
-    <script src="js/bootstrap-select.js"></script>
     <script>
-    $(document).on('change','.selectpicker',function(e){console.log(this.options[e.target.selectedIndex].text)})
     </script>
 
-    <!-- Map -->
-    <script src="js/leaflet.js"></script>
     <script>
+
+    var events = {};
+    eventbrite.getEvents(function(data){
+      events = data;
+      for (var i = 0; i < data.events.length; i++){
+        //events[data.events[i].id] = data.events[i];
+        $('.selectpicker').append("<option>"+data.events[i].name.html+"</option>");
+
+      }
+      console.log(events);
+    });
+
+    $(document).on('change','.selectpicker', function(e){
+      //if data doesn't exist already?
+      if (e.target.selectedIndex > 0){
+        //alert(events.events[e.target.selectedIndex-1].name.html);
+        eventbrite.getEventTickets(events.events[e.target.selectedIndex-1].id, function(data){
+          events.events[e.target.selectedIndex-1].tickets = {};
+          events.events[e.target.selectedIndex-1].tickets.available = 0;
+          events.events[e.target.selectedIndex-1].tickets.unavailable = 0;
+          for (var i = 0; i < data.ticket_classes.length; i++){
+            events.events[e.target.selectedIndex-1]["tickets"][data.ticket_classes[i].id] = data.ticket_classes[i];
+            switch(data.ticket_classes[i].on_sale_status){
+              case "AVAILABLE":
+                events.events[e.target.selectedIndex-1].tickets.available += 1;
+                break;
+              case "SOLD_OUT":
+              events.events[e.target.selectedIndex-1].tickets.unavailable +=1;
+            }
+            console.log(data.ticket_classes[i].name)
+          }
+          $("#labelAvailable").text(events.events[e.target.selectedIndex-1].tickets.available+" ");
+          $("#labelUnavailable").text(events.events[e.target.selectedIndex-1].tickets.unavailable+" ");
+          //$("#legend").prepend("<div><a>full event details></a></div>");
+        });
+      }
+    });
+    //eventbrite.getEventTickets(this.options[e.target.selectedIndex], callback: fn(?)))
+
+
+    //function(e){console.log(this.options[e.target.selectedIndex].text)})
+
+
     // Initialise map
     $("#map").css("height", $(window).height());
     var map = L.map('map', {zoomControl:false, attributionControl:false}).setView([22.35,114.27],11);
@@ -126,7 +162,7 @@
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicGV0YWpha2FydGEiLCJhIjoiTExKVVZ5TSJ9.IFf5jeFKz2iwMpBi5N3kUg', {
       maxZoom: 18,
       id: 'mapbox.streets'
-}).addTo(map);
+    }).addTo(map);
 
     // Side menu-toggle
     var info = L.control({position:'topleft'});
@@ -149,7 +185,8 @@
 
     $(window).on('resize', function(){
       $("#map").css("height", $(window).height());
-    })
+    });
+
 
     </script>
 
