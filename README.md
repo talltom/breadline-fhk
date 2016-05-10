@@ -18,3 +18,8 @@ To install based on include `package.json` do:
 
 ### License
 Open Source
+
+### To do
+1. Eventbrite functions - check if data exists before calling
+2. Geocode bakery addresses
+3. 

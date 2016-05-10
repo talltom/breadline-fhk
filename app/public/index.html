@@ -97,7 +97,7 @@
     <script src="js/leaflet.js"></script>
 
     <!-- Data -->
-    <script src="js/data.js"></script>
+    <script src="js/eventbrite.js"></script>
 
     <script>
     $.fn.bootstrapSwitch.defaults.size = 'mini';
@@ -109,47 +109,35 @@
 
     <script>
 
-    var events = {};
     eventbrite.getEvents(function(data){
-      events = data;
-      for (var i = 0; i < data.events.length; i++){
-        //events[data.events[i].id] = data.events[i];
-        $('.selectpicker').append("<option>"+data.events[i].name.html+"</option>");
-
+      eventbrite.events = data.events;
+      for (var i = 0; i < eventbrite.events.length; i++){
+        $('.selectpicker').append("<option>"+eventbrite.events[i].name.html+"</option>");
       }
-      console.log(events);
     });
 
     $(document).on('change','.selectpicker', function(e){
       //if data doesn't exist already?
       if (e.target.selectedIndex > 0){
-        //alert(events.events[e.target.selectedIndex-1].name.html);
-        eventbrite.getEventTickets(events.events[e.target.selectedIndex-1].id, function(data){
-          events.events[e.target.selectedIndex-1].tickets = {};
-          events.events[e.target.selectedIndex-1].tickets.available = 0;
-          events.events[e.target.selectedIndex-1].tickets.unavailable = 0;
+          eventbrite.getEventTickets(eventbrite.events[e.target.selectedIndex-1].id, function(data){
+          eventbrite.events[e.target.selectedIndex-1]['tickets'] = {};
+          eventbrite.events[e.target.selectedIndex-1].tickets['available'] = 0;
+          eventbrite.events[e.target.selectedIndex-1].tickets['unavailable'] = 0;
           for (var i = 0; i < data.ticket_classes.length; i++){
-            events.events[e.target.selectedIndex-1]["tickets"][data.ticket_classes[i].id] = data.ticket_classes[i];
+            eventbrite.events[e.target.selectedIndex-1].tickets[data.ticket_classes[i].id] = data.ticket_classes[i];
             switch(data.ticket_classes[i].on_sale_status){
               case "AVAILABLE":
-                events.events[e.target.selectedIndex-1].tickets.available += 1;
+                eventbrite.events[e.target.selectedIndex-1].tickets.available += 1;
                 break;
               case "SOLD_OUT":
-              events.events[e.target.selectedIndex-1].tickets.unavailable +=1;
+              eventbrite.events[e.target.selectedIndex-1].tickets.unavailable +=1;
             }
-            console.log(data.ticket_classes[i].name)
           }
-          $("#labelAvailable").text(events.events[e.target.selectedIndex-1].tickets.available+" ");
-          $("#labelUnavailable").text(events.events[e.target.selectedIndex-1].tickets.unavailable+" ");
-          //$("#legend").prepend("<div><a>full event details></a></div>");
+          $("#labelAvailable").text(eventbrite.events[e.target.selectedIndex-1].tickets.available+" ");
+          $("#labelUnavailable").text(eventbrite.events[e.target.selectedIndex-1].tickets.unavailable+" ");
         });
       }
     });
-    //eventbrite.getEventTickets(this.options[e.target.selectedIndex], callback: fn(?)))
-
-
-    //function(e){console.log(this.options[e.target.selectedIndex].text)})
-
 
     // Initialise map
     $("#map").css("height", $(window).height());
