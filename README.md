@@ -20,6 +20,6 @@ To install based on include `package.json` do:
 Open Source
 
 ### To do
-1. Eventbrite functions - check if data exists before calling
-2. Geocode bakery addresses
-3. 
+1. Eventbrite pagination
+2. Eventbrite functions - check if data exists before calling
+3. Geocode bakery addresses
