@@ -1,0 +1,10 @@
+{
+  "type": "Feature",
+  "geometry": {
+    "type": "Point",
+    "coordinates": [114.234947, 22.295254]
+  },
+  "properties": {
+    "name": "Feeding Hong Kong Foodbank, Unit 715-717, Block A2, Yau Tong Industrial City, 17-25 Ko Fai Road, Yau Tong"
+  }
+}
