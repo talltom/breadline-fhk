@@ -23,3 +23,5 @@ Open Source
 1. Eventbrite pagination
 2. Eventbrite functions - check if data exists before calling
 3. Geocode bakery addresses
+4. Map attribution
+5. Add event details + link
