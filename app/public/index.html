@@ -126,6 +126,15 @@
           eventbrite.events[e.target.selectedIndex-1].tickets['unavailable'] = 0;
           for (var i = 0; i < ticket_classes.length; i++){
             eventbrite.events[e.target.selectedIndex-1].tickets[ticket_classes[i].id] = ticket_classes[i];
+            //console.log(bakery_geojson)
+            for (var j = 0; j < bakery_geojson.features.length-1; j++) {
+              //console.log(bakery_geojson.features[j].properties.name+", "+ticket_classes[i].name);
+              if (bakery_geojson.features[j].properties.name === ticket_classes[i].name){
+                bakery_geojson.features[j].properties['state'] = ticket_classes[i].on_sale_status;
+                console.log(bakery_geojson.features[j]['state']);
+              }
+            }
+            //console.log(ticket_classes[i].id+", "+ticket_classes[i].name);
             switch(ticket_classes[i].on_sale_status){
               case "AVAILABLE":
                 eventbrite.events[e.target.selectedIndex-1].tickets.available += 1;
@@ -136,6 +145,23 @@
           }
           $("#labelAvailable").text(eventbrite.events[e.target.selectedIndex-1].tickets.available+" ");
           $("#labelUnavailable").text(eventbrite.events[e.target.selectedIndex-1].tickets.unavailable+" ");
+          bakeries.addData(bakery_geojson);
+          //console.log(eventbrite.events[e.target.selectedIndex-1].tickets);
+          /*for (var i = 0; i < bakery_geojson.features.length-1; i++) {
+            console.log(eventbrite.events[e.target.selectedIndex-1].tickets);
+            //bakery_geojson.features[i]['state'] = eventbrite.events[e.target.selectedIndex-1].tickets[bakery_geojson.features[i].properties.id].on_sale_status;
+            //console.log(bakery_geojson.features[i]);
+            for (var j = 0; j < eventbrite.events[e.target.selectedIndex-1].tickets.length-1; j++){
+              console.log('run');
+              if (bakery_geojson.features[i].properties.name === eventbrite.events[e.target.selectedIndex-1].tickets[j].name){
+                console.log('name matched');
+              }
+              else {
+                console.log('no match');
+              }
+            }
+          };*/
+          //console.log(bakery_geojson);
         });
       }
     });
@@ -143,7 +169,7 @@
     // Initialise map
     L.Icon.Default.imagePath = 'images/'
     $("#map").css("height", $(window).height());
-    var map = L.map('map', {zoomControl:false, attributionControl:false}).setView([22.35,114.27],11);
+    var map = L.map('map', {zoomControl:false, attributionControl:false}).setView([22.3,114.2],13);
 
     // Zoom control
     new L.Control.Zoom({ position: 'topright',  }).addTo(map);
@@ -182,21 +208,20 @@
 
     $('input[name="my-location"]').on('switchChange.bootstrapSwitch', function(event, state) {
       if (state === true){
-        map.locate({setView: true, maxZoom: 16});
+        map.locate({setView: true, maxZoom: 14});
         function onLocationFound(e) {
             var radius = e.accuracy / 2;
-
-            mylocation.addLayer(L.marker(e.latlng)
-                .bindPopup("You are within " + radius + " meters from this point").openPopup());
-
-            mylocation.addLayer(L.circle(e.latlng, radius));
+            if (radius > 6){
+              mylocation.addLayer(L.circle(e.latlng, radius, {stroke:false}));
+            }
+            mylocation.addLayer(L.circleMarker(e.latlng, {radius:6, stroke:false, fillColor:'#337ab7',fillOpacity:1}));
 
             mylocation.addTo(map);
         }
         map.on('locationfound', onLocationFound);
       }
       if (state === false){
-        map.setView([22.35,114.27],11);
+        map.setView([22.3,114.2],13);
         mylocation.clearLayers();
       }
     });
@@ -210,6 +235,24 @@
 
     $.getJSON('data/drop_off.geojson', function(data){
       drop_off.addData(data);
+    });
+
+    var bakeries  = L.geoJson(null, {
+      pointToLayer: function(feature, latlng){
+        switch (feature.properties.state) {
+          case "AVAILABLE":
+            return L.circleMarker(latlng, {radius:4, stroke:false, fillColor:'#e51843',fillOpacity:1});
+          default:
+            return L.circleMarker(latlng, {radius:4, stroke:false, fillColor:'grey',fillOpacity:1});
+        }
+      }
+    }).addTo(map);
+
+    var bakery_geojson;
+    $.getJSON('data/fhk_bakeries_geocoded.geojson', function(data){
+      //bakeries.addData(data);
+      bakery_geojson = data;
+      console.log(bakery_geojson);
     });
 
     </script>
