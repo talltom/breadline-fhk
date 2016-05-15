@@ -64,6 +64,11 @@ map.addDropOffLayer = function(){
   });
 };
 
+map._bakeryModal = function(e){
+  //alert(e.target.feature.properties.name);
+  $('#bakeryModal').modal('show');
+}
+
 map.prepareBakeries = function(){
   // Prepare locations of bakeries for the map, but don't load into leaflet
   map.layers.bakeries  = L.geoJson(null, {
@@ -74,6 +79,11 @@ map.prepareBakeries = function(){
         default:
           return L.circleMarker(latlng, {radius:5, stroke:true, color:'#FFF', weight:2, fillColor:'grey',fillOpacity:1});
       }
+    },
+    onEachFeature: function(feature, layer){
+      layer.on('click', function(e){
+        map._bakeryModal(e);
+      });
     }
   })
   // Get data but return to callback instead of adding to map.layers.bakeries
