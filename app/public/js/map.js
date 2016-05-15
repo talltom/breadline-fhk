@@ -42,7 +42,7 @@ map.initialise = function(){
 
   map.info.onAdd = function() {
       this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-      this._div.innerHTML = '<a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="padding-left:6px;padding-right:6px;"><span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="font-size:28px;color:#e51843;vertical-align:middle;"></span></a>';
+      this._div.innerHTML = '<a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="padding-left:6px;padding-right:6px;"><span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="font-size:28px;color:#dd2515;vertical-align:middle;"></span></a>';
       return this._div;
   };
   map.info.addTo(map.leafletMap);
@@ -55,7 +55,7 @@ map.addDropOffLayer = function(){
   // Add location of drop off point to the map
   map.layers.dropoff  = L.geoJson(null, {
     pointToLayer: function(feature, latlng){
-      return  L.marker(latlng, {icon:L.divIcon({className: 'div-icon-dropoff', html:'<p><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:#ff5900;font-size:26px;"></span></p>', popupAnchor:[5,0]})});
+      return  L.marker(latlng, {icon:L.divIcon({className: 'div-icon-dropoff', html:'<p><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:#252321;font-size:26px;"></span></p>', popupAnchor:[5,0]})});
     }
   }).addTo(map.leafletMap);
   // Get data
@@ -65,7 +65,8 @@ map.addDropOffLayer = function(){
 };
 
 map._bakeryModal = function(e){
-  //alert(e.target.feature.properties.name);
+  $('#bakeryModalText').empty();
+  $('#bakeryModalText').prepend(e.target.feature.properties.name);
   $('#bakeryModal').modal('show');
 }
 
@@ -75,7 +76,7 @@ map.prepareBakeries = function(){
     pointToLayer: function(feature, latlng){
       switch (feature.properties.state) {
         case "AVAILABLE":
-          return L.circleMarker(latlng, {radius:5, stroke:true, color:'#FFF', weight:2, fillColor:'#e51843',fillOpacity:1});
+          return L.circleMarker(latlng, {radius:5, stroke:true, color:'#FFF', weight:2, fillColor:'#dd2515',fillOpacity:1});
         default:
           return L.circleMarker(latlng, {radius:5, stroke:true, color:'#FFF', weight:2, fillColor:'grey',fillOpacity:1});
       }

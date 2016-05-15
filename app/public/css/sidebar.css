@@ -4,6 +4,10 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+body {
+font-family: 'Raleway', sans-serif;
+}
+
 /* Toggle Styles */
 
 #wrapper {
@@ -26,7 +30,7 @@
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #e51843;
+    background: #FFF;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -63,13 +67,18 @@
 }
 
 .sidebar-nav > .sidebar-element p {
-  color: #fff;
+  color: #252321;
+
 }
 
 .sidebar-nav > .sidebar-brand {
-    margin: 20px;
-    font-size: 44px;
-    color:#fff;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 0px;
+    margin-bottom:15px;
+    font-size: 60px;
+    color:#252321;
+    line-height: normal;
 }
 
 .sidebar-nav .dropdown-menu {
@@ -77,6 +86,12 @@
   max-width:210px;
   overflow: auto;
   font-size:11px;
+}
+
+.navbar-fixed-bottom {
+  color: #252321;
+  font-size:10px;
+  margin-left:15px;
 }
 
 #dropdownMenu1 {

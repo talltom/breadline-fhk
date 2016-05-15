@@ -17,6 +17,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <!-- Sidebar -->
     <link href="css/sidebar.css" rel="stylesheet">
 
@@ -29,6 +30,13 @@
     <!-- Leaflet maps -->
     <link rel="stylesheet" href="css/leaflet.css" rel="stylesheet"/>
 
+    <style>
+    #bakeryModal .modal-content {
+    overflow: auto;
+    padding-bottom: 15px;
+    }
+    </style>
+
     <!-- Main -->
 
   </head>
@@ -37,22 +45,23 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <div class="sidebar-nav" >
-                <div class="sidebar-element">
-                  <p>Feeding Hong Kong</p>
-                </div>
-                <div class="sidebar-brand">
-                  Bread Run Map
-                </div>
+              <div class="sidebar-element" style="margin-bottom:0px; font-family:'Montserrat' sans-serif;">
+                <p>Feeding Hong Kong</p>
+              </div>
+              <div class="sidebar-brand">
+                Bread Run Map
+              </div>
+
 
                 <select class="selectpicker" title="Select Event" data-mobile=true style="margin-left:20px;"></select>
                 <div class="panel panel-default sidebar-element">
                   <div class="panel-body" id="legend">
                     <div id="event_title"></div>
                     <div><h5 style="margin-bottom:4px;">Bakeries for Collection</h5></div>
-                    <div><span id="labelAvailable"></span><span>Available <div class="pull-right"><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:#e51843;font-weight:bold"></span></div></span></div>
+                    <div><span id="labelAvailable"></span><span>Available <div class="pull-right"><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:#dd2515;font-weight:bold"></span></div></span></div>
                     <div><span id="labelUnavailable"></span><span>Unavailable <div class="pull-right"><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:grey;font-weight:bold"></span></div></span></div>
                     <BR>
-                    <div><span>Drop off point <div class="pull-right"><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:#ff9900;font-weight:bold"></span></div></span></div>
+                    <div><span>Drop off point <div class="pull-right"><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:#252321;font-weight:bold"></span></div></span></div>
                     <BR>
                     <div>My location <div class="pull-right"><input type="checkbox" class="pull-right" name="my-location" false></div></div>
 
@@ -60,7 +69,7 @@
                 </div>
           </div>
           <div class="navbar navbar-fixed-bottom" style="height:20px;min-height:20px;">
-            <p style="font-size:10px;margin-left:20px;color:#FFF;">BreadLine OpenSource &middot HK FoodWorks &copy 2016</p>
+            <p><a>BreadLine OpenSource by HKFoodWorks &copy 2016</a></p>
           </div>
 
         </div>
@@ -77,23 +86,37 @@
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                     </div>-->
                     <div class="col-lg-12" style="padding:0;" id="map"></div>
+                    <!--Reports modal-->
                     <div class="modal fade" id="bakeryModal" tabindex="-1" role="dialog">
                     <div class="modal-dialog">
                       <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title">Modal title</h4>
-                        </div>
                         <div class="modal-body">
-                          <p>One fine body&hellip;</p>
+                          <h3 id="bakeryModalText"></h3>
+                          <a href="http://www.eventbrite.com/e/testrun-tickets-24991869354?ref=ebtnebregn" target="_blank"><img src="https://www.eventbrite.com/custombutton?eid=24991869354" alt="Eventbrite - TestRun" /></a>
+                          <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
                         </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+
                       </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                   </div><!-- /.modal -->
+                  <!--App info modal-->
+                  <div class="modal fade" id="appModal" tabindex="-1" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Modal title</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>One fine body&hellip;</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
                 </div>
             </div>
         </div> <!-- /#page-content-wrapper -->
