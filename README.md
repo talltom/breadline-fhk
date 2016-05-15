@@ -1,4 +1,4 @@
-# breadline-fhk
+cd # breadline-fhk
 
 Breadline is a suite of geospatial web applications produced as part of [Hong Kong Food Works](http://hkfoodworks.com/).
 
