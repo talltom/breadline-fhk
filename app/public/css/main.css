@@ -1,7 +1,26 @@
 body {
-    padding: 0;
-    margin: 0;
-}
-html, body, #map {
-    height: 100%;
-}
+  font-family: 'Raleway', sans-serif;
+  }
+
+#bakeryModal .modal-content {
+  overflow: auto;
+  padding-bottom: 15px;
+  }
+
+  .circle_confirmed {
+    width:10px;
+    height:10px;
+    border-radius:5px;
+    background:#dd2515;
+    margin-right: 2px;
+    margin-top: 4px;
+  }
+
+  .circle_unconfirmed {
+    width:10px;
+    height:10px;
+    border-radius:5px;
+    background:grey;
+    margin-right: 2px;
+    margin-top: 4px;
+  }

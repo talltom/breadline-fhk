@@ -64,12 +64,6 @@ map.addDropOffLayer = function(){
   });
 };
 
-map._bakeryModal = function(e){
-  $('#bakeryModalText').empty();
-  $('#bakeryModalText').prepend(e.target.feature.properties.name);
-  $('#bakeryModal').modal('show');
-}
-
 map.prepareBakeries = function(){
   // Prepare locations of bakeries for the map, but don't load into leaflet
   map.layers.bakeries  = L.geoJson(null, {
@@ -83,7 +77,7 @@ map.prepareBakeries = function(){
     },
     onEachFeature: function(feature, layer){
       layer.on('click', function(e){
-        map._bakeryModal(e);
+        _bakeryModal(e);
       });
     }
   })

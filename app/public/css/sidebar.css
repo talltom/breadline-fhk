@@ -4,10 +4,6 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-body {
-font-family: 'Raleway', sans-serif;
-}
-
 /* Toggle Styles */
 
 #wrapper {
@@ -68,7 +64,6 @@ font-family: 'Raleway', sans-serif;
 
 .sidebar-nav > .sidebar-element p {
   color: #252321;
-
 }
 
 .sidebar-nav > .sidebar-brand {
@@ -96,6 +91,10 @@ font-family: 'Raleway', sans-serif;
 
 #dropdownMenu1 {
   width: 100%;
+}
+
+#event_title {
+  margin-bottom: 16px;
 }
 
 @media(min-width:768px) {
