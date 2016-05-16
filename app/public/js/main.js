@@ -77,8 +77,10 @@ $('input[name="my-location"]').on('switchChange.bootstrapSwitch', function(event
 
 // UI spec for bakery modal
 _bakeryModal = function(e){
-  var name = e.target.feature.properties.name
   $('#bakeryModalText').empty();
+  $('#bakeryModalBtn').empty();
+  var name = e.target.feature.properties.name
   $('#bakeryModalText').prepend(name.replace('-', '<BR>-'));
+  $('#bakeryModalBtn').prepend('<a class="btn btn-warning" href="'+eventbrite.events[$('.selectpicker')[0].selectedIndex-1].url+'" target="_blank">Register Now on Eventbrite</a>')
   $('#bakeryModal').modal('show');
 }

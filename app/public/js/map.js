@@ -49,6 +49,8 @@ map.initialise = function(){
 
   // User location layer placeholder
   map.layers.mylocation = new L.FeatureGroup();
+
+  map.addLogo();
 };
 
 map.addDropOffLayer = function(){
@@ -106,3 +108,14 @@ map.userLocation = function(toggle){
     map.layers.mylocation.clearLayers();
   }
 };
+
+map.addLogo = function(){
+    // Branding logos
+    map.logo = L.control({position:'bottomright'});
+    map.logo.onAdd = function() {
+      var div = L.DomUtil.create('div', 'logo');
+      div.innerHTML += '<a href="http://hkfoodworks.com/" target="_blank"><img border="0" src="images/hkfoodworks_logo.png"/></a>&nbsp;<a href="http://feedinghk.org/" target="_blank"><img border="0" src="images/fhk_logo.png"/></a>';
+      return div;
+    };
+    map.logo.addTo(map.leafletMap);
+}
