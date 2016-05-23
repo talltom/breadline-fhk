@@ -3,8 +3,8 @@
 
 var eventbrite = {
   config : {
-    token : "GSAVA4B45GPLIPWWP6D7", //Eventbrite API token *secret*
-    organizerID : "2684124262", //Eventbrite organizer ID
+    token : "", //Eventbrite API token *secret*
+    organizerID : "2684124262", //Eventbrite organizer ID (Feeding Hong Kong)
     max_ticket_pages: 2
   },
   events : {}
