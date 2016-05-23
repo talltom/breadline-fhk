@@ -85,6 +85,12 @@ _bakeryModal = function(e){
   $('#bakeryModalBtn').empty();
   var name = e.target.feature.properties.name
   $('#bakeryModalText').prepend(name.replace('-', '<BR>-'));
-  $('#bakeryModalBtn').prepend('<a class="btn btn-warning" href="'+eventbrite.events[$('.selectpicker')[0].selectedIndex-1].url+'" target="_blank">Register Now on Eventbrite</a>')
+  if (e.target.feature.properties.state === 'AVAILABLE'){
+    $('#bakeryModalBtn').prepend('<a class="btn btn-warning" href="'+eventbrite.events[$('.selectpicker')[0].selectedIndex-1].url+'" target="_blank">Register Now on Eventbrite</a>')
+
+  }
+  else {
+    $('#bakeryModalBtn').prepend('<p>Not available</p>')
+  }
   $('#bakeryModal').modal('show');
 }
