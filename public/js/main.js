@@ -18,6 +18,10 @@ $(document).on('change','.selectpicker', function(e){
   $('#event_title').html('<h5><a href="'+eventbrite.events[e.target.selectedIndex-1].url+'" target="_blank">'+eventbrite.events[e.target.selectedIndex-1].name.html+'</a></h5>');
   //if data doesn't exist already?
   if (e.target.selectedIndex > 0){
+      console.log('h');
+      if (!eventbrite.events[e.target.selectedIndex-1].tickets){
+        console.log('y');
+      }
       eventbrite.getEventTickets(eventbrite.events[e.target.selectedIndex-1].id, function(ticket_classes){
       eventbrite.events[e.target.selectedIndex-1].tickets = {};
       eventbrite.events[e.target.selectedIndex-1].tickets['available'] = 0;
