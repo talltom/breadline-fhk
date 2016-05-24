@@ -3,12 +3,26 @@
 
 var eventbrite = {
   config : {
-    token : "", //Eventbrite API token *secret*
+    key: "LGRGVEBIBCQZ4YW7KD", //Eventbrite API key for this app
+    token : null, //Eventbrite API token *secret*
     organizerID : "2684124262", //Eventbrite organizer ID (Feeding Hong Kong)
     max_ticket_pages: 2
   },
   events : {}
 };
+
+eventbrite.getUserToken = function(callback){
+  if (eventbrite.config.token === null){
+    if (window.location.hash){
+      eventbrite.config.token = window.location.hash.substring(1);
+      callback();
+    }
+    else {
+      $('#authmodal, .modal-body').append('<a class="btn btn-success" href="https://www.eventbrite.com/oauth/authorize?response_type=token&client_id='+eventbrite.config.key+'">Login to Eventbrite ></a>');
+      $('#authModal').modal('show');
+    }
+  }
+}
 
 eventbrite.getEvents = function(callback){
     $.getJSON("https://www.eventbriteapi.com/v3/events/search/?organizer.id="+eventbrite.config.organizerID+"&token="+eventbrite.config.token, function(data, status){
