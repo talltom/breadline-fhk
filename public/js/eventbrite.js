@@ -14,7 +14,7 @@ var eventbrite = {
 eventbrite.getUserToken = function(callback){
   if (eventbrite.config.token === null){
     if (window.location.hash){
-      eventbrite.config.token = window.location.hash.substring(1);
+      eventbrite.config.token = $.url('#access_token');
       callback();
     }
     else {
