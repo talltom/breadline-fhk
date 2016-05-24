@@ -16,7 +16,7 @@ To install based on `package.json` do:
 
 #### Configure
 Edit `eventbrite.config.token` parameter in `public/js/eventbrite.js` with appropriate token.
-Without token, app will run but no bakeries will be available on the map
+Without token, the app will run but no bakeries will be available on the map.
 
 #### Run
 `node app.js`
