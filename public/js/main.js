@@ -4,12 +4,14 @@
 $.fn.bootstrapSwitch.defaults.size = 'mini';
 $("[name='my-location']").bootstrapSwitch();
 
-// Get events from Eventbrite
-eventbrite.getEvents(function(data){
-  eventbrite.events = data.events;
-  for (var i = 0; i < eventbrite.events.length; i++){
-    $('.selectpicker').append("<option>"+eventbrite.events[i].name.html+"</option>");
-  }
+eventbrite.getUserToken(function(){
+  // Get events from Eventbrite
+  eventbrite.getEvents(function(data){
+    eventbrite.events = data.events;
+    for (var i = 0; i < eventbrite.events.length; i++){
+      $('.selectpicker').append("<option>"+eventbrite.events[i].name.html+"</option>");
+    }
+  });
 });
 
 // Load layers per user event selection
