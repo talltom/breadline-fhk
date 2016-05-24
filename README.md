@@ -25,10 +25,10 @@ Without token, the app will run but no bakeries will be available on the map.
 - `public/data/fhk_bakeries.{csv | geojson}` - pickup locations
 - `public/data/drop_off.geojson` - drop off location
 - Geolocation of Bakeries is very coarse
-- Chrome 50+ requires HTTPS for user's geolocation
+- ~~Chrome 50+ requires HTTPS for user's geolocation~~ (we have https)
 
 ### License
-Open Source
+Open Source. TBC.
 
 ### To do
 1. ~~Eventbrite pagination~~
@@ -36,5 +36,5 @@ Open Source
 3. Check Geocode bakery addresses
 4. ~~Map attribution~~
 5. ~~Add event details + link~~
-6. Eventbrite User Authentication
+6. ~~Eventbrite User Authentication~~
 7. Add License file
