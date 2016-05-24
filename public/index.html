@@ -122,7 +122,7 @@
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                       <h4 class="modal-title">Authenticate with Eventbrite</h4>
                     </div>
-                    <div class="modal-body" id="eventbrite_modal">
+                    <div class="modal-body" id="authModalBody">
                       <p>The Bread Run uses Eventbrite to organise collections.</p>
                       <p>Click the button below to login to Eventbrite before using the map.</p>
                     </div>
@@ -132,6 +132,19 @@
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
               </div><!-- /.modal -->
+              <!--Eventbrite Auth Success modal-->
+              <div class="modal fade" id="authSuccessModal" tabindex="-1" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <h3><span class="glyphicon glyphicon-ok-circle" style="color:green; vertical-align: top;" aria-hidden="true"></span> Eventbrite Authentication Succesful</h3>
+                    <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+
+
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
                 </div>
             </div>
         </div> <!-- /#page-content-wrapper -->

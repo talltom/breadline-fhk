@@ -2,7 +2,7 @@ body {
   font-family: 'Raleway', sans-serif;
   }
 
-#bakeryModal .modal-content {
+#bakeryModal, #authSuccessModal .modal-content {
   overflow: auto;
   padding-bottom: 15px;
   }
