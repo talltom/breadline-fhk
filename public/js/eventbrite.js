@@ -18,7 +18,7 @@ eventbrite.getUserToken = function(callback){
       callback();
     }
     else {
-      $('#authmodal, .modal-body').append('<a class="btn btn-success" href="https://www.eventbrite.com/oauth/authorize?response_type=token&client_id='+eventbrite.config.key+'">Login to Eventbrite ></a>');
+      $('#authmodal > .modal-body').append('<a class="btn btn-success" href="https://www.eventbrite.com/oauth/authorize?response_type=token&client_id='+eventbrite.config.key+'">Login to Eventbrite ></a>');
       $('#authModal').modal('show');
     }
   }
