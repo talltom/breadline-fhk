@@ -1,5 +1,4 @@
 //main.js - breadline-fhk main JavaScript file.
-$('#authSuccessModal').modal('show');
 
 // Create toggle switch for user location
 $.fn.bootstrapSwitch.defaults.size = 'mini';
