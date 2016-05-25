@@ -58,6 +58,11 @@ map.addDropOffLayer = function(){
   map.layers.dropoff  = L.geoJson(null, {
     pointToLayer: function(feature, latlng){
       return  L.marker(latlng, {icon:L.divIcon({className: 'div-icon-dropoff', html:'<p><span class="glyphicon glyphicon-record" aria-hidden="true" style="color:#252321;font-size:26px;"></span></p>', popupAnchor:[5,0]})});
+    },
+    onEachFeature: function(feature, layer){
+      layer.on('click', function(e){
+        _dropoffModal(e);
+      });
     }
   }).addTo(map.leafletMap);
   // Get data
