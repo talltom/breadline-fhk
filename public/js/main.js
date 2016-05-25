@@ -17,7 +17,7 @@ eventbrite.getUserToken(function(){
 // Load layers per user event selection
 $(document).on('change','.selectpicker', function(e){
   if ($('#authSuccessModal').is(':visible')){
-    $('#authSuccessModal').modal('hidden');
+    $('#authSuccessModal').modal('hide');
   }
   $('#event_title').empty();
   $('#event_title').html('<h5><a href="'+eventbrite.events[e.target.selectedIndex-1].url+'" target="_blank">'+eventbrite.events[e.target.selectedIndex-1].name.html+'</a></h5>');
