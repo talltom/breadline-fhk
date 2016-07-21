@@ -37,6 +37,17 @@ map.initialise = function(){
     id: 'mapbox.outdoors'
   }).addTo(map.leafletMap);
 
+  L.Routing.control({
+  waypoints: [
+    L.latLng(22.31641339681286,114.18228149414062),
+    L.latLng(22.27861290461762,114.16030883789062)
+  ],
+   router: L.Routing.mapzen('valhalla-cH7Yjs8', {costing:'auto'}),
+   formatter: new L.Routing.mapzenFormatter(),
+   summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
+   routeWhileDragging: false
+}).addTo(map.leafletMap);
+
   // Side menu-toggle
   map.info = L.control({position:'topleft'});
 
