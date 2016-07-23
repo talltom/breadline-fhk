@@ -129,6 +129,8 @@ map.addLogo = function(){
 }
 //source, destination, mode
 map.routing = function(origin){
+    console.log(origin);
+    console.log(L.latLng(22.28,114.16030883789062));
     L.Routing.control({
     waypoints: [
       //L.latLng(22.31641339681286,114.18228149414062),
