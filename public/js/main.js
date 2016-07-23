@@ -88,7 +88,8 @@ _bakeryModal = function(e){
   // Routing options
   $('#routingBtn').on('click', function(e){
     console.log(e);
-    var userLocation = map.userLocation(true)
+    var userLocation = map.userLocation(true);
+    $('#userlocationToggle').checked = true;
     map.routing(userLocation);
     $('#bakeryModal').modal('hide');
   });

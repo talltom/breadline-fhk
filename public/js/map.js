@@ -105,7 +105,7 @@ map.userLocation = function(toggle){
         }
         map.layers.mylocation.addLayer(L.circleMarker(e.latlng, {radius:6, stroke:false, fillColor:'#337ab7',fillOpacity:1}));
         map.layers.mylocation.addTo(map.leafletMap);
-        userLocation = e;
+        userLocation = e.latlng;
       }
       map.leafletMap.on('locationfound', onLocationFound);
       return (userLocation);
