@@ -84,12 +84,12 @@ $('input[name="my-location"]').on('switchChange.bootstrapSwitch', function(event
 
 window.targetBakeryProps = {};
 // UI spec for bakery modal
-_bakeryModal = function(e){
+_bakeryModal = function(bakery){
   // Routing options
   $('#routingBtn').on('click', function(e){
     map.leafletMap.locate({setView: false});
     map.leafletMap.on('locationfound', function(userLocation){
-      map.routing(userLocation.latlng, e.latlng, $('#routingSelectpicker').val());
+      map.routing(userLocation.latlng, bakery.latlng, $('#routingSelectpicker').val());
     });
     $('#bakeryModal').modal('hide');
   });
@@ -97,9 +97,9 @@ _bakeryModal = function(e){
   // Bakery details
   $('#bakeryModalText').empty();
   $('#bakeryModalBtn').empty();
-  var name = e.target.feature.properties.name
+  var name = bakery.target.feature.properties.name
   $('#bakeryModalText').prepend('<h3>'+name.replace('-', '<BR>-')+'</h3>');
-  if (e.target.feature.properties.state === 'AVAILABLE'){
+  if (bakery.target.feature.properties.state === 'AVAILABLE'){
     $('#bakeryModalBtn').prepend('<a class="btn btn-warning" href="'+eventbrite.events[$('#authSuccessSelectPicker')[0].selectedIndex-1].url+'" target="_blank">Register Now on Eventbrite</a>');
   }
   else {
