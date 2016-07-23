@@ -85,8 +85,10 @@ $('input[name="my-location"]').on('switchChange.bootstrapSwitch', function(event
 window.targetBakeryProps = {};
 // UI spec for bakery modal
 _bakeryModal = function(e){
+  console.log(e);
   // Routing options
   $('#routingBtn').on('click', function(e){
+    map.leafletMap.locate({setView: false});
     map.leafletMap.on('locationfound', function(userLocation){
       map.routing(userLocation.latlng);
     });
