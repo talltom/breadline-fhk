@@ -124,16 +124,14 @@ map.addLogo = function(){
     map.logo.addTo(map.leafletMap);
 }
 //source, destination, mode
-map.routing = function(origin){
-    console.log(origin);
-    console.log(L.latLng(22.28,114.16030883789062));
+map.routing = function(origin, destination, mode){
+    console.log(origin, destination, mode);
     L.Routing.control({
     waypoints: [
-      //L.latLng(22.31641339681286,114.18228149414062),
       origin,
-      L.latLng(22.28,114.16030883789062)
+      destination
     ],
-     router: L.Routing.mapzen('valhalla-cH7Yjs8', {costing:'pedestrian', costing_options:{transit:{use_bus:'1.0', use_rail:"1.0"}}}),
+     router: L.Routing.mapzen('valhalla-cH7Yjs8', {costing:mode, costing_options:{transit:{use_bus:'1.0', use_rail:"1.0"}}}),
      formatter: new L.Routing.mapzenFormatter(),
      summaryTemplate:'<div id="route" class="start">{name}</div><div class=" {costing}">{distance}, {time}</div>',
      routeWhileDragging: false
