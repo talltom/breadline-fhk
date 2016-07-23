@@ -87,9 +87,9 @@ window.targetBakeryProps = {};
 _bakeryModal = function(e){
   // Routing options
   $('#routingBtn').on('click', function(e){
-    var userLocation = map.userLocation(true);
-    //$('#userlocationToggle').checked = true;
-    map.routing(userLocation);
+    map.leafletMap.on('locationfound', function(userLocation){
+      map.routing(userLocation);
+    });
     $('#bakeryModal').modal('hide');
   });
 

@@ -95,7 +95,6 @@ map.prepareBakeries = function(){
 };
 
 map.userLocation = function(toggle){
-  var userLocation = null;
   if (toggle === true){
     map.leafletMap.locate({setView: true, maxZoom: 14});
     function onLocationFound(e) {
@@ -105,15 +104,12 @@ map.userLocation = function(toggle){
         }
         map.layers.mylocation.addLayer(L.circleMarker(e.latlng, {radius:6, stroke:false, fillColor:'#337ab7',fillOpacity:1}));
         map.layers.mylocation.addTo(map.leafletMap);
-        userLocation = e.latlng;
       }
       map.leafletMap.on('locationfound', onLocationFound);
-      return (userLocation);
     }
   else {
     map.leafletMap.setView(map.config.defaultCentre, map.config.defaultZoom);
     map.layers.mylocation.clearLayers();
-    return (userLocation);
   }
 };
 
