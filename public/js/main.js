@@ -9,13 +9,13 @@ eventbrite.getUserToken(function(){
   eventbrite.getEvents(function(data){
     eventbrite.events = data.events;
     for (var i = 0; i < eventbrite.events.length; i++){
-      $('.selectpicker').append("<option>"+eventbrite.events[i].name.html+"</option>");
+      $('#authSuccessSelectPicker, #sidebarSelectPicker').append("<option>"+eventbrite.events[i].name.html+"</option>");
     }
   });
 });
 
 // Load layers per user event selection
-$(document).on('change','.selectpicker', function(e){
+$(document).on('change','#authSuccessModal, #sidebarSelectPicker', function(e){
   if ($('#authSuccessModal').is(':visible')){
     $('#sidebarSelectPicker').selectpicker('val', $('#authSuccessSelectPicker').val());
     $('#authSuccessModal').modal('hide');
@@ -82,20 +82,29 @@ $('input[name="my-location"]').on('switchChange.bootstrapSwitch', function(event
   map.userLocation(state);
 });
 
+window.targetBakeryProps = {};
 // UI spec for bakery modal
 _bakeryModal = function(e){
+  // Routing options
+  $('#routingBtn').on('click', function(e){
+    console.log(e);
+    map.routing();
+    $('#bakeryModal').modal('hide');
+  });
+  // Bakery details
   $('#bakeryModalText').empty();
   $('#bakeryModalBtn').empty();
   var name = e.target.feature.properties.name
   $('#bakeryModalText').prepend('<h3>'+name.replace('-', '<BR>-')+'</h3>');
   if (e.target.feature.properties.state === 'AVAILABLE'){
-    $('#bakeryModalBtn').prepend('<a class="btn btn-warning" href="'+eventbrite.events[$('.selectpicker')[0].selectedIndex-1].url+'" target="_blank">Register Now on Eventbrite</a>');
+    $('#bakeryModalBtn').prepend('<a class="btn btn-warning" href="'+eventbrite.events[$('#authSuccessSelectPicker')[0].selectedIndex-1].url+'" target="_blank">Register Now on Eventbrite</a>');
   }
   else {
     $('#bakeryModalBtn').prepend('<p>Not available</p>');
   }
   $('#bakeryModal').modal('show');
 }
+
 
 // UI spec for bakery modal
 _dropoffModal = function(e){

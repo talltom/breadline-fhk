@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="css/leaflet.css" rel="stylesheet"/>
 
     <!-- Routing -->
-    <link rel="stylesheet" href="https://npmcdn.com/lrm-mapzen/dist/leaflet.routing.mapzen.css">
+    <link rel="stylesheet" href="css/leaflet-routing-machine.css" rel="stylesheet">
 
     <!-- Sidebar -->
     <link href="css/sidebar.css" rel="stylesheet">
@@ -82,14 +82,27 @@
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                     </div>-->
                     <div class="col-lg-12" id="map"></div>
-                    <!--Reports modal-->
+                    <!--Bakery modal-->
                     <div class="modal fade" id="bakeryModal" tabindex="-1" role="dialog">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-body">
                           <div id="bakeryModalText"></div>
                           <div id="bakeryModalBtn"></div>
+                          <div class="panel panel-default">
+                            <div class="panel-heading">
+                              <h3 class="panel-title">Suggested route from your location</h3>
+                            </div>
+                            <div class="panel-body">
+                              <select class="selectpicker" data-mobile="true" id="routingSelectpicker">
+                                <option value="walking">Walking</option>
+                                <option value="car">Car</option>
+                              </select>
+                              <button id="routingBtn" type="button" class="btn btn-info">Show Route</button>
+                            </div>
+                          </div>
                           <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+
                         </div>
                       </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
@@ -173,7 +186,8 @@
     <script src="js/leaflet.js"></script>
 
     <!-- Routing -->
-    <script src="https://raw.githubusercontent.com/perliedman/leaflet-routing-machine/leaflet-1.0/dist/leaflet-routing-machine.js"></script>
+    <!--<script src="https://raw.githubusercontent.com/perliedman/leaflet-routing-machine/leaflet-1.0/dist/leaflet-routing-machine.js"></script>-->
+    <script src="js/leaflet-routing-machine.js"></script>
     <script src="https://npmcdn.com/lrm-mapzen/dist/lrm-mapzen.js"></script>
 
     <!-- Data -->
@@ -184,6 +198,6 @@
 
     <!-- Main -->
     <script src="js/main.js"></script>
-
+    <script>  $('#bakeryModal').modal('show');</script>
   </body>
 </html>

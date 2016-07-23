@@ -206,6 +206,7 @@ if (typeof module !== undefined) module.exports = polyline;
 			this._selectFn = L.Util.bind(callback, context);
 			this._container = L.DomUtil.create('div', 'leaflet-routing-geocoder-result');
 			this._resultTable = L.DomUtil.create('table', '', this._container);
+      this._container += 'test2';
 
 			// TODO: looks a bit like a kludge to register same for input and keypress -
 			// browsers supporting both will get duplicate events; just registering
@@ -2362,7 +2363,7 @@ if (typeof module !== undefined) module.exports = polyline;
 				if (this._waypoints[i].latLng) {
 					m = this.options.createMarker(i, this._waypoints[i], this._waypoints.length);
 					if (m) {
-						m.addTo(this._map);
+						//m.addTo(this._map); removed start, end points
 						if (this.options.draggableWaypoints) {
 							this._hookWaypointEvents(m, i);
 						}

@@ -37,17 +37,6 @@ map.initialise = function(){
     id: 'mapbox.outdoors'
   }).addTo(map.leafletMap);
 
-  L.Routing.control({
-  waypoints: [
-    L.latLng(22.31641339681286,114.18228149414062),
-    L.latLng(22.27861290461762,114.16030883789062)
-  ],
-   router: L.Routing.mapzen('valhalla-cH7Yjs8', {costing:'auto'}),
-   formatter: new L.Routing.mapzenFormatter(),
-   summaryTemplate:'<div class="start">{name}</div><div class="info {costing}">{distance}, {time}</div>',
-   routeWhileDragging: false
-}).addTo(map.leafletMap);
-
   // Side menu-toggle
   map.info = L.control({position:'topleft'});
 
@@ -95,6 +84,7 @@ map.prepareBakeries = function(){
     },
     onEachFeature: function(feature, layer){
       layer.on('click', function(e){
+        window.targetBakeryProps = 'test';
         _bakeryModal(e);
       });
     }
@@ -134,4 +124,17 @@ map.addLogo = function(){
       return div;
     };
     map.logo.addTo(map.leafletMap);
+}
+//source, destination, mode
+map.routing = function(){
+    L.Routing.control({
+    waypoints: [
+      L.latLng(22.31641339681286,114.18228149414062),
+      L.latLng(22.28,114.16030883789062)
+    ],
+     router: L.Routing.mapzen('valhalla-cH7Yjs8', {costing:'pedestrian', costing_options:{transit:{use_bus:'1.0', use_rail:"1.0"}}}),
+     formatter: new L.Routing.mapzenFormatter(),
+     summaryTemplate:'<div id="route" class="start">{name}</div><div class=" {costing}">{distance}, {time}</div>',
+     routeWhileDragging: false
+  }).addTo(map.leafletMap);
 }
