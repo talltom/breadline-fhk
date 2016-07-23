@@ -91,7 +91,7 @@ _bakeryModal = function(bakery){
     map.leafletMap.on('locationfound', function(userLocation){
       map.routing(userLocation.latlng, bakery.latlng, $('#routingSelectpicker').val());
     });
-    $('#bakeryModal').modal('hide');
+    //$('#bakeryModal').modal('hide');
   });
 
   // Bakery details

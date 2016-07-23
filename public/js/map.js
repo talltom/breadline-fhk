@@ -133,8 +133,9 @@ map.routing = function(origin, destination, mode){
     ],
      router: L.Routing.mapzen('valhalla-cH7Yjs8', {costing:mode, costing_options:{transit:{use_bus:'1.0', use_rail:"1.0"}}}),
      formatter: new L.Routing.mapzenFormatter(),
-     containerClassName: 'routeText',
-     //summaryTemplate:'<div id="route" class="start">{name}</div><div class=" {costing}">{distance}, {time}</div>',
+     summaryTemplate:'<div id="route" class="start">{name}</div><div class=" {costing}">{distance}, {time}</div>',
      routeWhileDragging: false
-  }).addTo(map.leafletMap);
+  });
+  var routeText = control.onAdd(map.leafletMap);
+  $('#routingText').append(routeText);
 }
