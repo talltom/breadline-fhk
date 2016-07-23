@@ -84,7 +84,6 @@ map.prepareBakeries = function(){
     },
     onEachFeature: function(feature, layer){
       layer.on('click', function(e){
-        window.targetBakeryProps = 'test';
         _bakeryModal(e);
       });
     }
@@ -108,10 +107,12 @@ map.userLocation = function(toggle){
         map.layers.mylocation.addTo(map.leafletMap);
       }
       map.leafletMap.on('locationfound', onLocationFound);
+      return (e.latlng);
     }
   else {
     map.leafletMap.setView(map.config.defaultCentre, map.config.defaultZoom);
     map.layers.mylocation.clearLayers();
+    return (null);
   }
 };
 
@@ -126,10 +127,11 @@ map.addLogo = function(){
     map.logo.addTo(map.leafletMap);
 }
 //source, destination, mode
-map.routing = function(){
+map.routing = function(origin){
     L.Routing.control({
     waypoints: [
-      L.latLng(22.31641339681286,114.18228149414062),
+      //L.latLng(22.31641339681286,114.18228149414062),
+      origin,
       L.latLng(22.28,114.16030883789062)
     ],
      router: L.Routing.mapzen('valhalla-cH7Yjs8', {costing:'pedestrian', costing_options:{transit:{use_bus:'1.0', use_rail:"1.0"}}}),
