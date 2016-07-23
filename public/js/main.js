@@ -88,7 +88,7 @@ _bakeryModal = function(e){
   // Routing options
   $('#routingBtn').on('click', function(e){
     map.leafletMap.on('locationfound', function(userLocation){
-      map.routing(userLocation);
+      map.routing(userLocation.latlng);
     });
     $('#bakeryModal').modal('hide');
   });
