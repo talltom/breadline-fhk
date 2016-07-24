@@ -87,11 +87,13 @@ window.targetBakeryProps = {};
 _bakeryModal = function(bakery){
   // Routing options
   $('#routingBtn').on('click', function(e){
+    $("#routingPanel").removeClass('hidden');
+    map.leafletMap.removeControl(map.routingControl);
     map.leafletMap.locate({setView: false});
     map.leafletMap.on('locationfound', function(userLocation){
       $('#routingTitle').append('<h5>Suggested Route - '+$('#routingSelectpicker option:selected').text()+'</h5>')
       $('#routingText').append('<p>'+bakery.target.feature.properties.name+'</p>');
-      $('#userlocationToggle').bootstrapSwitch('state', true, true);
+      $('#userlocationToggle').bootstrapSwitch('toggleState', true, true);
       map.routing(userLocation.latlng, bakery.latlng, $('#routingSelectpicker').val());
     });
     $('#bakeryModal').modal('hide');

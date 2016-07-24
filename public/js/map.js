@@ -137,5 +137,6 @@ map.routing = function(origin, destination, mode){
      routeWhileDragging: false
   });
   var routeText = map.routingControl.onAdd(map.leafletMap);
+  $('#routingText').empty();
   $('#routingText').append(routeText);
 }
