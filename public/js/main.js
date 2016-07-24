@@ -92,7 +92,7 @@ _bakeryModal = function(bakery){
       $('#routingText').append('<p>Suggested route to '+bakery.target.feature.properties.name+'</p>');
       map.routing(userLocation.latlng, bakery.latlng, $('#routingSelectpicker').val());
     });
-    //$('#bakeryModal').modal('hide');
+    $('#bakeryModal').modal('hide');
   });
 
   // Bakery details
@@ -109,7 +109,6 @@ _bakeryModal = function(bakery){
   $('#bakeryModal').modal('show');
 }
 
-
 // UI spec for bakery modal
 _dropoffModal = function(e){
   $('#bakeryModalText').empty();
@@ -117,3 +116,10 @@ _dropoffModal = function(e){
   $('#bakeryModalText').prepend('<h3>Drop Off Location</h3><p>'+e.target.feature.properties.name+'</p>');
   $('#bakeryModal').modal('show');
 }
+
+// Close routing
+$('.clickable').on('click',function(){
+    var effect = $(this).data('effect');
+        $(this).closest('.panel')[effect]();
+	})
+})
