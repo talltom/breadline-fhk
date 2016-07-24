@@ -14,7 +14,8 @@ var map = {
   },
   layers : {},
   data : {
-    bakeries :{}
+    bakeries :{},
+    userLocation: {}
   }
 };
 
@@ -94,7 +95,7 @@ map.prepareBakeries = function(){
   });
 };
 
-/*map.userLocation = function(toggle){
+map.userLocation = function(toggle){
   if (toggle === true){
     map.leafletMap.locate({setView: true, maxZoom: 14});
     function onLocationFound(e) {
@@ -104,6 +105,7 @@ map.prepareBakeries = function(){
         }
         map.layers.mylocation.addLayer(L.circleMarker(e.latlng, {radius:6, stroke:false, fillColor:'#337ab7',fillOpacity:1}));
         map.layers.mylocation.addTo(map.leafletMap);
+        map.data.userLocation = e;
       }
       map.leafletMap.on('locationfound', onLocationFound);
     }
@@ -111,7 +113,7 @@ map.prepareBakeries = function(){
     map.leafletMap.setView(map.config.defaultCentre, map.config.defaultZoom);
     map.layers.mylocation.clearLayers();
   }
-};*/
+};
 
 map.addLogo = function(){
     // Branding logos

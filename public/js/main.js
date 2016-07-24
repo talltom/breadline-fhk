@@ -78,9 +78,9 @@ $(window).on('resize', function(){
 });
 
 // Enable user location UI
-//$('input[name="my-location"]').on('switchChange.bootstrapSwitch', function(event, state) {
-//  map.userLocation(state);
-//});
+$('input[name="my-location"]').on('switchChange.bootstrapSwitch', function(event, state) {
+  map.userLocation(state);
+});
 
 var currentBakery = null;
 
@@ -104,23 +104,20 @@ _bakeryModal = function(bakery){
 
 // Routing options
 $('#routingBtn').on('click', function(e){
-  console.log(map.routingControl);
-  if (map.routingControl){
-    console.log('yes');
-    map.routingControl.getPlan().setWaypoints([]);
-    map.leafletMap.removeControl(map.routingControl);
+  if ($.isEmptyObject(map.data.userLocation)){
+    alert('Please first enable location in the toolbar');
   }
-  console.log('button clicked');
-  $("#routingPanel").removeClass('hidden');
-  //map.leafletMap.removeControl(map.routingControl);
-  map.leafletMap.locate({setView: false});
-  //$('#userlocationToggle').bootstrapSwitch('toggleState', true, true);
-  map.leafletMap.on('locationfound', function(userLocation){
-    console.log('fired');
+  else {
+    if (map.routingControl){
+      map.routingControl.getPlan().setWaypoints([]);
+      map.leafletMap.removeControl(map.routingControl);
+      $('#routingTitle').empty();
+    }
+    $("#routingPanel").removeClass('hidden');
     $('#routingTitle').append('<h5>Suggested Route - '+$('#routingSelectpicker option:selected').text()+'</h5>')
     $('#routingText').append('<p>'+currentBakery.target.feature.properties.name+'</p>');
-    map.routing(userLocation.latlng, currentBakery.latlng, $('#routingSelectpicker').val());
-  });
+    map.routing(map.data.userLocation.latlng, currentBakery.latlng, $('#routingSelectpicker').val());
+  }
   $('#bakeryModal').modal('hide');
 });
 
@@ -136,8 +133,9 @@ _dropoffModal = function(e){
 $('.clickable').on('click',function(){
     map.routingControl.getPlan().setWaypoints([]);
     map.leafletMap.removeControl(map.routingControl);
-    var effect = $(this).data('effect');
-        $(this).closest('.panel')[effect]();
+    //var effect = $(this).data('effect');
+    //    $(this).closest('.panel')[effect]();
+    $("#routingPanel").addClass('hidden');
 
 
 });
