@@ -91,6 +91,7 @@ _bakeryModal = function(bakery){
     map.leafletMap.on('locationfound', function(userLocation){
       $('#routingTitle').append('<h5>Suggested Route - '+$('#routingSelectpicker option:selected').text()+'</h5>')
       $('#routingText').append('<p>'+bakery.target.feature.properties.name+'</p>');
+      $('#userlocationToggle').bootstrapSwitch('state', true, true);
       map.routing(userLocation.latlng, bakery.latlng, $('#routingSelectpicker').val());
     });
     $('#bakeryModal').modal('hide');
