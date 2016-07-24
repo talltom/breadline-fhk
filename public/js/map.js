@@ -94,7 +94,7 @@ map.prepareBakeries = function(){
   });
 };
 
-map.userLocation = function(toggle){
+/*map.userLocation = function(toggle){
   if (toggle === true){
     map.leafletMap.locate({setView: true, maxZoom: 14});
     function onLocationFound(e) {
@@ -111,7 +111,7 @@ map.userLocation = function(toggle){
     map.leafletMap.setView(map.config.defaultCentre, map.config.defaultZoom);
     map.layers.mylocation.clearLayers();
   }
-};
+};*/
 
 map.addLogo = function(){
     // Branding logos

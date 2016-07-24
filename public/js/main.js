@@ -78,28 +78,16 @@ $(window).on('resize', function(){
 });
 
 // Enable user location UI
-$('input[name="my-location"]').on('switchChange.bootstrapSwitch', function(event, state) {
-  map.userLocation(state);
-});
+//$('input[name="my-location"]').on('switchChange.bootstrapSwitch', function(event, state) {
+//  map.userLocation(state);
+//});
 
-window.targetBakeryProps = {};
+var currentBakery = null;
+
 // UI spec for bakery modal
 _bakeryModal = function(bakery){
-  // Routing options
-  $('#routingBtn').on('click', function(e){
-    $("#routingPanel").removeClass('hidden');
-    //map.leafletMap.removeControl(map.routingControl);
-    map.leafletMap.locate({setView: false});
-    $('#userlocationToggle').bootstrapSwitch('toggleState', true, true);
-    map.leafletMap.on('locationfound', function(userLocation){
-      console.log('fired');
-      $('#routingTitle').append('<h5>Suggested Route - '+$('#routingSelectpicker option:selected').text()+'</h5>')
-      $('#routingText').append('<p>'+bakery.target.feature.properties.name+'</p>');
-      map.routing(userLocation.latlng, bakery.latlng, $('#routingSelectpicker').val());
-    });
-    $('#bakeryModal').modal('hide');
-  });
-
+  console.log('modal fired');
+  currentBakery = bakery;
   // Bakery details
   $('#bakeryModalText').empty();
   $('#bakeryModalBtn').empty();
@@ -113,6 +101,28 @@ _bakeryModal = function(bakery){
   }
   $('#bakeryModal').modal('show');
 }
+
+// Routing options
+$('#routingBtn').on('click', function(e){
+  console.log(map.routingControl);
+  if (map.routingControl){
+    console.log('yes');
+    map.routingControl.getPlan().setWaypoints([]);
+    map.leafletMap.removeControl(map.routingControl);
+  }
+  console.log('button clicked');
+  $("#routingPanel").removeClass('hidden');
+  //map.leafletMap.removeControl(map.routingControl);
+  map.leafletMap.locate({setView: false});
+  //$('#userlocationToggle').bootstrapSwitch('toggleState', true, true);
+  map.leafletMap.on('locationfound', function(userLocation){
+    console.log('fired');
+    $('#routingTitle').append('<h5>Suggested Route - '+$('#routingSelectpicker option:selected').text()+'</h5>')
+    $('#routingText').append('<p>'+currentBakery.target.feature.properties.name+'</p>');
+    map.routing(userLocation.latlng, currentBakery.latlng, $('#routingSelectpicker').val());
+  });
+  $('#bakeryModal').modal('hide');
+});
 
 // UI spec for bakery modal
 _dropoffModal = function(e){
