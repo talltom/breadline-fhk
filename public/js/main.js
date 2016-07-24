@@ -91,6 +91,7 @@ _bakeryModal = function(bakery){
     map.leafletMap.removeControl(map.routingControl);
     map.leafletMap.locate({setView: false});
     map.leafletMap.on('locationfound', function(userLocation){
+      console.log('fired');
       $('#routingTitle').append('<h5>Suggested Route - '+$('#routingSelectpicker option:selected').text()+'</h5>')
       $('#routingText').append('<p>'+bakery.target.feature.properties.name+'</p>');
       $('#userlocationToggle').bootstrapSwitch('toggleState', true, true);
