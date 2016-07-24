@@ -1,5 +1,5 @@
 .leaflet-routing-container {
-    width: 320px;
+    width: 208px;
     background-color: white;
     padding-top: 4px;
     transition: all 0.2s ease;
@@ -11,11 +11,11 @@
 }
 
 .leaflet-routing-container h2 {
-    font-size: 14px;
+    font-size: 10px;
 }
 
 .leaflet-routing-container h3 {
-    font-size: 12px;
+    font-size: 8px;
     font-weight: normal;
 }
 
