@@ -88,13 +88,13 @@ _bakeryModal = function(bakery){
   // Routing options
   $('#routingBtn').on('click', function(e){
     $("#routingPanel").removeClass('hidden');
-    map.leafletMap.removeControl(map.routingControl);
+    //map.leafletMap.removeControl(map.routingControl);
     map.leafletMap.locate({setView: false});
+    $('#userlocationToggle').bootstrapSwitch('toggleState', true, true);
     map.leafletMap.on('locationfound', function(userLocation){
       console.log('fired');
       $('#routingTitle').append('<h5>Suggested Route - '+$('#routingSelectpicker option:selected').text()+'</h5>')
       $('#routingText').append('<p>'+bakery.target.feature.properties.name+'</p>');
-      $('#userlocationToggle').bootstrapSwitch('toggleState', true, true);
       map.routing(userLocation.latlng, bakery.latlng, $('#routingSelectpicker').val());
     });
     $('#bakeryModal').modal('hide');
@@ -124,7 +124,10 @@ _dropoffModal = function(e){
 
 // Close routing
 $('.clickable').on('click',function(){
+    map.routingControl.getPlan().setWaypoints([]);
+    map.leafletMap.removeControl(map.routingControl);
     var effect = $(this).data('effect');
         $(this).closest('.panel')[effect]();
-    map.leafletMap.removeControl(map.routingControl);
+
+
 });
