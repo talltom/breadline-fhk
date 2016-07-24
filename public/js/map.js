@@ -126,7 +126,7 @@ map.addLogo = function(){
 //source, destination, mode
 map.routing = function(origin, destination, mode){
     console.log(origin, destination, mode);
-    map.routingControl = routingControl = L.Routing.control({
+    map.routingControl = L.Routing.control({
     waypoints: [
       origin,
       destination
