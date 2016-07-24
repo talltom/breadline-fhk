@@ -1,3 +1,7 @@
+.routing-text {
+  padding:15px;
+}
+
 .leaflet-routing-container {
     width: 208px;
     background-color: white;
