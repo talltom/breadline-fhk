@@ -121,4 +121,5 @@ _dropoffModal = function(e){
 $('.clickable').on('click',function(){
     var effect = $(this).data('effect');
         $(this).closest('.panel')[effect]();
+    map.leafletMap.removeControl(map.routingControl);
 });

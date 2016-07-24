@@ -126,7 +126,7 @@ map.addLogo = function(){
 //source, destination, mode
 map.routing = function(origin, destination, mode){
     console.log(origin, destination, mode);
-    var routingControl = L.Routing.control({
+    map.routingControl = routingControl = L.Routing.control({
     waypoints: [
       origin,
       destination
@@ -136,6 +136,6 @@ map.routing = function(origin, destination, mode){
      summaryTemplate:'<div class=" {costing}">{costing}: {distance}, {time}</div>',
      routeWhileDragging: false
   });
-  var routeText = routingControl.onAdd(map.leafletMap);
+  var routeText = map.routingControl.onAdd(map.leafletMap);
   $('#routingText').append(routeText);
 }
