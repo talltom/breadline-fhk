@@ -1,8 +1,11 @@
 .leaflet-routing-container {
-    width: 178px;
+    width: 209px;
     background-color: white;
-    padding-top: 4px;
+    padding: 0px;
+    margin:0px;
     transition: all 0.2s ease;
+    box-shadow:none;
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .leaflet-control-container .leaflet-routing-container-hide {
