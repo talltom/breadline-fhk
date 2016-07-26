@@ -133,6 +133,7 @@ $('#routingBtn').on('click', function(e){
 
 // UI spec for bakery modal
 _dropoffModal = function(e){
+  currentBakery = e;
   $('#bakeryModalText').empty();
   $('#bakeryModalBtn').empty();
   $('#bakeryModalText').prepend('<h3>Drop Off Location</h3><p>'+e.target.feature.properties.name+'</p>');
