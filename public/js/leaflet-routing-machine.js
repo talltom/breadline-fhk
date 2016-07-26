@@ -814,6 +814,7 @@ if (typeof module !== undefined) module.exports = polyline;
 		},
 
 		getIconName: function(instr, i) {
+      console.log(instr);
 			switch (instr.type) {
 			case 'Straight':
 				return (i === 0 ? 'depart' : 'continue');

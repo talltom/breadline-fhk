@@ -23,8 +23,10 @@ $(document).on('change','#authSuccessModal, #sidebarSelectPicker', function(e){
   $('#event_title').empty();
   $('#event_title').html('<h5><a href="'+eventbrite.events[e.target.selectedIndex-1].url+'" target="_blank">'+eventbrite.events[e.target.selectedIndex-1].name.html+'</a></h5>');
   if (e.target.selectedIndex > 0){
-      if (!eventbrite.events[e.target.selectedIndex-1].tickets){
-      }
+      //Possible caching check for data already stored, not implemented at this time
+      /*if (!eventbrite.events[e.target.selectedIndex-1].tickets){
+        console.log('fired');
+      }*/
       eventbrite.getEventTickets(eventbrite.events[e.target.selectedIndex-1].id, function(ticket_classes){
       eventbrite.events[e.target.selectedIndex-1].tickets = {};
       eventbrite.events[e.target.selectedIndex-1].tickets['available'] = 0;
@@ -33,6 +35,7 @@ $(document).on('change','#authSuccessModal, #sidebarSelectPicker', function(e){
         eventbrite.events[e.target.selectedIndex-1].tickets[ticket_classes[i].id] = ticket_classes[i];
         for (var j = 0; j < map.data.bakeries.features.length-1; j++) {
           if (map.data.bakeries.features[j].properties.name === ticket_classes[i].name){
+            map.data.bakeries.features[j].properties.id = ticket_classes[i].id;
             map.data.bakeries.features[j].properties['state'] = ticket_classes[i].on_sale_status;
           }
         }
@@ -86,7 +89,6 @@ var currentBakery = null;
 
 // UI spec for bakery modal
 _bakeryModal = function(bakery){
-  console.log('modal fired');
   currentBakery = bakery;
   // Bakery details
   $('#bakeryModalText').empty();
@@ -94,7 +96,7 @@ _bakeryModal = function(bakery){
   var name = bakery.target.feature.properties.name
   $('#bakeryModalText').prepend('<h3>'+name.replace('-', '<BR>-')+'</h3>');
   if (bakery.target.feature.properties.state === 'AVAILABLE'){
-    $('#bakeryModalBtn').prepend('<a class="btn btn-warning" href="'+eventbrite.events[$('#authSuccessSelectPicker')[0].selectedIndex-1].url+'" target="_blank">Register Now on Eventbrite</a>');
+    $('#bakeryModalBtn').prepend('<a class="btn btn-warning" href="'+eventbrite.events[$('#authSuccessSelectPicker, #sidebarSelectPicker')[0].selectedIndex-1].url+'#remaining_quant_'+bakery.target.feature.properties.id+'_None'+'" target="_blank">Register Now on Eventbrite</a>');
   }
   else {
     $('#bakeryModalBtn').prepend('<p>Not available</p>');
