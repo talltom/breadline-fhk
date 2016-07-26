@@ -85,6 +85,10 @@ $('input[name="my-location"]').on('switchChange.bootstrapSwitch', function(event
   map.userLocation(state);
 });
 
+// Toggle user location by default.
+map.userLocation(true);
+$('input[name="my-location"]').bootstrapSwitch('state', true, true);
+
 var currentBakery = null;
 
 // UI spec for bakery modal
@@ -138,6 +142,4 @@ $('.clickable').on('click',function(){
     //var effect = $(this).data('effect');
     //    $(this).closest('.panel')[effect]();
     $("#routingPanel").addClass('hidden');
-
-
 });

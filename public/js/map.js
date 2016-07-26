@@ -107,7 +107,11 @@ map.userLocation = function(toggle){
         map.layers.mylocation.addTo(map.leafletMap);
         map.data.userLocation = e;
       }
+    function onLocationNotFound(e){
+      $('input[name="my-location"]').bootstrapSwitch('state', false);
+    }
       map.leafletMap.on('locationfound', onLocationFound);
+      map.leafletMap.on('locationerror', onLocationNotFound);
     }
   else {
     map.leafletMap.setView(map.config.defaultCentre, map.config.defaultZoom);
