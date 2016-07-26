@@ -260,8 +260,8 @@ if (typeof module !== undefined) module.exports = polyline;
 				td.appendChild(text);
 				// mousedown + click because:
 				// http://stackoverflow.com/questions/10652852/jquery-fire-click-before-blur-event
-				L.DomEvent.addListener(td, 'mousedown', L.DomEvent.preventDefault);
-				L.DomEvent.addListener(td, 'click', this._createClickListener(results[i]));
+				//L.DomEvent.addListener(td, 'mousedown', L.DomEvent.preventDefault);
+				//L.DomEvent.addListener(td, 'click', this._createClickListener(results[i]));
 			}
 
 			if (!i) {
@@ -584,9 +584,9 @@ if (typeof module !== undefined) module.exports = polyline;
 		},
 
 		_hookEvents: function(l) {
-			l.on('linetouched', function(e) {
-				this._plan.dragNewWaypoint(e);
-			}, this);
+			//l.on('linetouched', function(e) {
+			//	this._plan.dragNewWaypoint(e);
+			//}, this);
 		},
 
 		_hookAltEvents: function(l) {
@@ -1132,7 +1132,7 @@ if (typeof module !== undefined) module.exports = polyline;
 					time: this._formatter.formatTime(alt.summary.totalTime)
 				}, alt);
 			altDiv.innerHTML = typeof(template) === 'function' ? template(data) : L.Util.template(template, data);
-			L.DomEvent.addListener(altDiv, 'click', this._onAltClicked, this);
+			//L.DomEvent.addListener(altDiv, 'click', this._onAltClicked, this);
 			this.on('routeselected', this._selectAlt, this);
 
 			altDiv.appendChild(this._createItineraryContainer(alt));
@@ -2271,18 +2271,18 @@ if (typeof module !== undefined) module.exports = polyline;
 			if (this.options.addWaypoints) {
 				addWpBtn = L.DomUtil.create('button', 'leaflet-routing-add-waypoint ' + this.options.addButtonClassName, container);
 				addWpBtn.setAttribute('type', 'button');
-				L.DomEvent.addListener(addWpBtn, 'click', function() {
-					this.spliceWaypoints(waypoints.length, 0, null);
-				}, this);
+				//L.DomEvent.addListener(addWpBtn, 'click', function() {
+				//	this.spliceWaypoints(waypoints.length, 0, null);
+				//}, this);
 			}
 
 			if (this.options.reverseWaypoints) {
 				reverseBtn = L.DomUtil.create('button', 'leaflet-routing-reverse-waypoints', container);
 				reverseBtn.setAttribute('type', 'button');
-				L.DomEvent.addListener(reverseBtn, 'click', function() {
-					this._waypoints.reverse();
-					this.setWaypoints(this._waypoints);
-				}, this);
+				//L.DomEvent.addListener(reverseBtn, 'click', function() {
+				//	this._waypoints.reverse();
+				//	this.setWaypoints(this._waypoints);
+				//}, this);
 			}
 
 			this._updateGeocoders();
