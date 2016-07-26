@@ -66,7 +66,7 @@ select.selectpicker {
 .bootstrap-select.btn-group[class*="col-"] {
   float: none;
   display: inline-block;
-  margin-left: 20px;
+  margin-left: 0px;
 }
 .bootstrap-select.btn-group.dropdown-menu-right,
 .bootstrap-select.btn-group[class*="col-"].dropdown-menu-right,
