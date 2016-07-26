@@ -110,6 +110,10 @@ _bakeryModal = function(bakery){
 
 // Routing options
 $('#routingBtn').on('click', function(e){
+  // Open sidebar if closed
+  if ($("#wrapper").css('padding-left') !== "250px"){
+    $("#wrapper").toggleClass("toggled");
+  }
   if ($.isEmptyObject(map.data.userLocation)){
     alert('Please first enable location in the toolbar');
   }
