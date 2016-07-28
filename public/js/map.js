@@ -116,6 +116,7 @@ map.userLocation = function(toggle){
   else {
     map.leafletMap.setView(map.config.defaultCentre, map.config.defaultZoom);
     map.layers.mylocation.clearLayers();
+    map.data.userLocation = {};
   }
 };
 
