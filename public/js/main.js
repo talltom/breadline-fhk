@@ -81,7 +81,7 @@ $(window).on('resize', function(){
 });
 
 // Enable user location UI
-$('input[name="my-location"]').on('switchChange.bootstrapSwitch', function(event, state) {
+$('#userlocationToggle').on('switchChange.bootstrapSwitch', function(event, state) {
   map.userLocation(state);
 });
 
@@ -114,7 +114,7 @@ $('#routingBtn').on('click', function(e){
   if ($("#wrapper").css('padding-left') !== "250px"){
     $("#wrapper").toggleClass("toggled");
   }
-  if ($.isEmptyObject(map.data.userLocation)){
+  if ($.isEmptyObject(map.data.user_location)){
     alert('Please first enable location in the toolbar');
   }
   else {
@@ -126,7 +126,7 @@ $('#routingBtn').on('click', function(e){
     $("#routingPanel").removeClass('hidden');
     $('#routingTitle').append('<h5>Suggested Route - '+$('#routingSelectpicker option:selected').text()+'</h5>')
     $('#routingText').append('<p>'+currentBakery.target.feature.properties.name+'</p>');
-    map.routing(map.data.userLocation.latlng, currentBakery.latlng, $('#routingSelectpicker').val());
+    map.routing(map.data.user_location.latlng, currentBakery.latlng, $('#routingSelectpicker').val());
   }
   $('#bakeryModal').modal('hide');
 });

@@ -15,7 +15,13 @@ var map = {
   layers : {},
   data : {
     bakeries :{},
-    userLocation: {}
+    user_location: {},
+    bounds: {
+      "xMin": 113.835,
+      "yMin": 22.1532,
+      "xMax": 114.441,
+      "yMax": 22.5621
+    }
   }
 };
 
@@ -52,6 +58,9 @@ map.initialise = function(){
   map.layers.mylocation = new L.FeatureGroup();
 
   map.addLogo();
+
+  map.leafletMap.on('locationfound', map.onLocationFound);
+  map.leafletMap.on('locationerror', map.onLocationNotFound);
 };
 
 map.addDropOffLayer = function(){
@@ -95,28 +104,37 @@ map.prepareBakeries = function(){
   });
 };
 
+map.onLocationFound = function(e) {
+    // check bounds
+    if (map.checkBounds(e.latlng.lat, e.latlng.lng)){
+      map.leafletMap.setView(e.latlng, 14);
+      var radius = e.accuracy / 2;
+      if (radius > 6){
+        map.layers.mylocation.addLayer(L.circle(e.latlng, radius, {stroke:false}));
+      }
+      map.layers.mylocation.addLayer(L.circleMarker(e.latlng, {radius:6, stroke:false, fillColor:'#337ab7',fillOpacity:1}));
+      map.layers.mylocation.addTo(map.leafletMap);
+      map.data.user_location = e;
+    }
+    else {
+      $('input[name="my-location"]').bootstrapSwitch('state', false);
+      alert('Could not determine user location inside Hong Kong: '+JSON.stringify(e.latlng));
+      console.log('Could not determine location inside Hong Kong');
+    }
+};
+
+map.onLocationNotFound = function(e){
+  $('input[name="my-location"]').bootstrapSwitch('state', false);
+}
+
 map.userLocation = function(toggle){
   if (toggle === true){
-    map.leafletMap.locate({setView: true, maxZoom: 14});
-    function onLocationFound(e) {
-        var radius = e.accuracy / 2;
-        if (radius > 6){
-          map.layers.mylocation.addLayer(L.circle(e.latlng, radius, {stroke:false}));
-        }
-        map.layers.mylocation.addLayer(L.circleMarker(e.latlng, {radius:6, stroke:false, fillColor:'#337ab7',fillOpacity:1}));
-        map.layers.mylocation.addTo(map.leafletMap);
-        map.data.userLocation = e;
-      }
-    function onLocationNotFound(e){
-      $('input[name="my-location"]').bootstrapSwitch('state', false);
-    }
-      map.leafletMap.on('locationfound', onLocationFound);
-      map.leafletMap.on('locationerror', onLocationNotFound);
+      map.leafletMap.locate();
     }
   else {
     map.leafletMap.setView(map.config.defaultCentre, map.config.defaultZoom);
     map.layers.mylocation.clearLayers();
-    map.data.userLocation = {};
+    map.data.user_location = {};
   }
 };
 
@@ -129,7 +147,8 @@ map.addLogo = function(){
       return div;
     };
     map.logo.addTo(map.leafletMap);
-}
+};
+
 //source, destination, mode
 map.routing = function(origin, destination, mode){
     map.routingControl = L.Routing.control({
@@ -145,4 +164,15 @@ map.routing = function(origin, destination, mode){
   var routeText = map.routingControl.onAdd(map.leafletMap);
   $('#routingText').empty();
   $('#routingText').append(routeText);
-}
+};
+
+// Function to check a point (lat, lon) is within map.data.bounds
+// Returns true if point inside bounds, else returns false.
+map.checkBounds = function(lat, lon){
+  if (lat < map.data.bounds.yMax && lat > map.data.bounds.yMin && lon < map.data.bounds.xMax && lon > map.data.bounds.xMin ){
+    return (true);
+  }
+  else {
+    return (false);
+  }
+};
