@@ -99,7 +99,7 @@ map.prepareBakeries = function(){
     }
   })
   // Get data but return to callback instead of adding to map.layers.bakeries
-  $.getJSON('data/fhk_bakeries_geocoded.geojson', function(data){
+  $.getJSON('data/fhk_bakeries_geocoded_with_mtr.geojson', function(data){
     map.data.bakeries = data;
   });
 };

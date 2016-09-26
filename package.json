@@ -5,5 +5,8 @@
   "author": "Tomas Holderness <tomasholderness@gmail.com>",
   "dependencies": {
     "express": "^4.13.4"
+  },
+  "devDependencies": {
+    "@turf/nearest": "^3.5.2"
   }
 }

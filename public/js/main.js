@@ -97,8 +97,11 @@ _bakeryModal = function(bakery){
   // Bakery details
   $('#bakeryModalText').empty();
   $('#bakeryModalBtn').empty();
+  $('#stationMTR').empty();
   var name = bakery.target.feature.properties.name
+  var mtr = bakery.target.feature.properties.nearest_mtr.properties.Station;
   $('#bakeryModalText').prepend('<h3>'+name.replace('-', '<BR>-')+'</h3>');
+  $('#stationMTR').append('Nearest MTR Station: '+mtr);
   if (bakery.target.feature.properties.state === 'AVAILABLE'){
     $('#bakeryModalBtn').prepend('<a class="btn btn-warning" href="'+eventbrite.events[$('#authSuccessSelectPicker, #sidebarSelectPicker')[0].selectedIndex-1].url+'#remaining_quant_'+bakery.target.feature.properties.id+'_None'+'" target="_blank">Register Now on Eventbrite</a>');
   }
@@ -114,9 +117,10 @@ $('#routingBtn').on('click', function(e){
   if ($("#wrapper").css('padding-left') !== "250px"){
     $("#wrapper").toggleClass("toggled");
   }
-  if ($.isEmptyObject(map.data.user_location)){
+/*  if ($.isEmptyObject(map.data.user_location)){
     alert('Please first enable location in the toolbar');
   }
+*/
   else {
     if (map.routingControl){
       map.routingControl.getPlan().setWaypoints([]);
@@ -126,7 +130,9 @@ $('#routingBtn').on('click', function(e){
     $("#routingPanel").removeClass('hidden');
     $('#routingTitle').append('<h5>Suggested Route - '+$('#routingSelectpicker option:selected').text()+'</h5>')
     $('#routingText').append('<p>'+currentBakery.target.feature.properties.name+'</p>');
-    map.routing(map.data.user_location.latlng, currentBakery.latlng, $('#routingSelectpicker').val());
+    var mtr_coords = currentBakery.target.feature.properties.nearest_mtr.geometry.coordinates;
+    //console.log(L.latLng(mtr_coords[1], mtr_coords[0]), currentBakery.latlng);
+    map.routing(L.latLng(mtr_coords[1], mtr_coords[0]), currentBakery.latlng, $('#routingSelectpicker').val());
   }
   $('#bakeryModal').modal('hide');
 });
