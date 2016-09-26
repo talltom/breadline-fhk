@@ -117,11 +117,11 @@ $('#routingBtn').on('click', function(e){
   if ($("#wrapper").css('padding-left') !== "250px"){
     $("#wrapper").toggleClass("toggled");
   }
+// Disable geo-location check
 /*  if ($.isEmptyObject(map.data.user_location)){
     alert('Please first enable location in the toolbar');
   }
 */
-  else {
     if (map.routingControl){
       map.routingControl.getPlan().setWaypoints([]);
       map.leafletMap.removeControl(map.routingControl);
@@ -131,9 +131,7 @@ $('#routingBtn').on('click', function(e){
     $('#routingTitle').append('<h5>Suggested Route - '+$('#routingSelectpicker option:selected').text()+'</h5>')
     $('#routingText').append('<p>'+currentBakery.target.feature.properties.name+'</p>');
     var mtr_coords = currentBakery.target.feature.properties.nearest_mtr.geometry.coordinates;
-    //console.log(L.latLng(mtr_coords[1], mtr_coords[0]), currentBakery.latlng);
     map.routing(L.latLng(mtr_coords[1], mtr_coords[0]), currentBakery.latlng, $('#routingSelectpicker').val());
-  }
   $('#bakeryModal').modal('hide');
 });
 

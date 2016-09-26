@@ -118,7 +118,7 @@ map.onLocationFound = function(e) {
     }
     else {
       $('input[name="my-location"]').bootstrapSwitch('state', false);
-      alert('Could not determine user location inside Hong Kong: '+JSON.stringify(e.latlng));
+      //alert('Could not determine user location inside Hong Kong: '+JSON.stringify(e.latlng));
       console.log('Could not determine location inside Hong Kong');
     }
 };
